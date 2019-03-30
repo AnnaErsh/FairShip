@@ -55,6 +55,22 @@ veto::veto()
   fUseSupport=1;
   fPlasticVeto=0;
   fLiquidVeto=1;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<"Created Myfile"<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  myfile = new TFile("myfile", "RECREATE");
+  mytree = new TTree("mytree", "");
+  mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:Process/I");
 }
 
 veto::veto(const char* name, Bool_t active)
@@ -95,6 +111,22 @@ veto::veto(const char* name, Bool_t active)
   fUseSupport=1;
   fPlasticVeto=0;
   fLiquidVeto=1;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<"Created Myfile"<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  myfile = new TFile("/sw/slc7_x86-64/FairShip/master-1/macro/myfile", "RECREATE");
+  mytree = new TTree("mytree", "");
+  mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:Process/I");
 }
 
 veto::~veto()
@@ -103,6 +135,22 @@ veto::~veto()
     fvetoPointCollection->Delete();
     delete fvetoPointCollection;
   }
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<"deleted Myfile"<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  cout<<endl;
+  myfile->Write();
+  delete mytree;
+  delete myfile;
 }
 
 void veto::Initialize()
@@ -1111,6 +1159,14 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
     Double_t xmean = (fPos.X()+Pos.X())/2. ;
     Double_t ymean = (fPos.Y()+Pos.Y())/2. ;
     Double_t zmean = (fPos.Z()+Pos.Z())/2. ;
+
+    TMCProcess proc = gMC->ProdProcess();
+	mystr.Energy = gMC->Edep();
+	mystr.x = Pos.X();
+	mystr.y = Pos.Y();
+	mystr.z = Pos.Z();
+	mystr.Process = proc;
+	mytree->Fill();
 //    cout << veto_uniqueId << " :(" << xmean << ", " << ymean << ", " << zmean << "): " << gMC->CurrentVolName() << endl;
     AddHit(fTrackID, veto_uniqueId, TVector3(xmean, ymean,  zmean),
            TVector3(fMom.Px(), fMom.Py(), fMom.Pz()), fTime, fLength,
@@ -1573,6 +1629,18 @@ vetoPoint* veto::AddHit(Int_t trackID, Int_t detID,
   // cout << "veto hit called "<< pos.z()<<endl;
   return new(clref[size]) vetoPoint(trackID, detID, pos, mom,
          time, length, eLoss, pdgCode,Lpos,Lmom);
+}
+// add process
+vetoPoint* veto::AddHit(Int_t trackID, Int_t detID,
+                                      TVector3 pos, TVector3 mom,
+                                      Double_t time, Double_t length,
+                                      Double_t eLoss, Int_t pdgCode,TVector3 Lpos, TVector3 Lmom, TMCProcess Process)
+{
+  TClonesArray& clref = *fvetoPointCollection;
+  Int_t size = clref.GetEntriesFast();
+  // cout << "veto hit called "<< pos.z()<<endl;
+  return new(clref[size]) vetoPoint(trackID, detID, pos, mom,
+         time, length, eLoss, pdgCode,Lpos,Lmom,Process);
 }
 
 void veto::InnerAddToMap(Int_t ncpy, Double_t x, Double_t y, Double_t z, Double_t dx, Double_t dy, Double_t dz)

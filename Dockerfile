@@ -6,10 +6,15 @@
 FROM olantwin/ship-base:20181116
 
 # Copy FairShip scripts
-COPY . /FairShip
+#COPY . /FairShip
+
+#my repo
+RUN git clone -b master https://github.com/AnnaErsh/FairShip.git
 
 # Build FairShip
-RUN aliBuild -c shipdist/ --defaults fairship build FairShip --no-local ROOT && aliBuild clean --aggressive-cleanup
+RUN aliBuild -c shipdist/ --defaults fairship build FairShip --no-local ROOT && aliBuild clean 
+
+RUN mkdir /sw/slc7_x86-64/FairRoot/latest/include/source && cp /sw/slc7_x86-64/FairRoot/latest/include/*.h /sw/slc7_x86-64/FairRoot/latest/include/source && mkdir /sw/slc7_x86-64/FairRoot/latest/include/steer && cp /sw/slc7_x86-64/FairRoot/latest/include/*.h /sw/slc7_x86-64/FairRoot/latest/include/steer && mkdir /sw/slc7_x86-64/FairRoot/latest/include/sim && cp /sw/slc7_x86-64/FairRoot/latest/include/*.h /sw/slc7_x86-64/FairRoot/latest/include/sim && mkdir /sw/slc7_x86-64/FairRoot/latest/include/field && cp /sw/slc7_x86-64/FairRoot/latest/include/*.h /sw/slc7_x86-64/FairRoot/latest/include/field && mkdir /sw/slc7_x86-64/FairRoot/latest/include/event && cp /sw/slc7_x86-64/FairRoot/latest/include/*.h /sw/slc7_x86-64/FairRoot/latest/include/event
 
 # Setup environment. Setup the command that will be invoked when your docker
 # image is run. Note that this requires running with `docker run -t` so that

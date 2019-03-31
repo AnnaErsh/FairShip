@@ -6,6 +6,8 @@
 #include "TLorentzVector.h"
 #include "TGeoVolume.h"
 #include "TMCProcess.h"
+#include "TFile.h"
+#include "TTree.h"
 #include <map>
 
 class vetoPoint;

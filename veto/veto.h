@@ -5,7 +5,7 @@
 #include "TVector3.h"
 #include "TLorentzVector.h"
 #include "TGeoVolume.h"
-#include "Rtypes.h"
+#include "TMCProcess.h"
 #include <map>
 
 class vetoPoint;

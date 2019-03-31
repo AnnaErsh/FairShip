@@ -20,14 +20,6 @@ vetoPoint::vetoPoint(Int_t trackID, Int_t detID,
   : FairMCPoint(trackID, detID, pos, mom, tof, length, eLoss),fPdgCode(pdgcode),fLpos(Lpos),fLmom(Lmom)
 {
 }
-// -----   My constructor with processes  ------------------------------------------
-vetoPoint::vetoPoint(Int_t trackID, Int_t detID,
-                                   TVector3 pos, TVector3 mom,
-                                   Double_t tof, Double_t length,
-                                   Double_t eLoss, Int_t pdgcode, TVector3 Lpos, TVector3 Lmom, TMCProcess Process)
-  : FairMCPoint(trackID, detID, pos, mom, tof, length, eLoss),fPdgCode(pdgcode),fLpos(Lpos),fLmom(Lmom), fProcess(Process)
-{
-}
 // -------------------------------------------------------------------------
 // -------------------------------------------------------------------------
 

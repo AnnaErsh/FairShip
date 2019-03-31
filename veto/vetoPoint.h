@@ -46,8 +46,6 @@ class vetoPoint : public FairMCPoint
     vetoPoint(const vetoPoint& point);
     vetoPoint operator=(const vetoPoint& point);
 
-    TMCProcess fProcess="";
-
     ClassDef(vetoPoint,3)
 	
 };

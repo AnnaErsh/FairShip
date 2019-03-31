@@ -5,14 +5,14 @@
 #include "TVector3.h"
 #include "TLorentzVector.h"
 #include "TGeoVolume.h"
-
+#include "Rtypes.h"
 #include <map>
 
 class vetoPoint;
 class FairVolume;
 class TClonesArray;
 
-struct mystruct __attribute__((packed)) {
+struct __attribute__((packed)) mystruct {
 	double Energy;
 	double x;
 	double y;

@@ -19,7 +19,7 @@ struct __attribute__((packed)) mystruct {
 	double x;
 	double y;
 	double z;
-	TMCProcess Process;
+//	TMCProcess Process;
 };
 
 

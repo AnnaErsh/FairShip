@@ -126,7 +126,7 @@ veto::veto(const char* name, Bool_t active)
   cout<<endl;
   myfile = new TFile("/sw/slc7_x86-64/FairShip/master-1/macro/myfile", "RECREATE");
   mytree = new TTree("mytree", "");
-  mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:Process/I");
+  mytree->Branch("mytree", &mystr, "Energy/D:x:y:z");
 }
 
 veto::~veto()
@@ -1160,12 +1160,12 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
     Double_t ymean = (fPos.Y()+Pos.Y())/2. ;
     Double_t zmean = (fPos.Z()+Pos.Z())/2. ;
 
-    TMCProcess proc = gMC->ProdProcess();
+  //  TMCProcess proc = gMC->ProdProcess();
 	mystr.Energy = gMC->Edep();
 	mystr.x = Pos.X();
 	mystr.y = Pos.Y();
 	mystr.z = Pos.Z();
-	mystr.Process = proc;
+//	mystr.Process = proc;
 	mytree->Fill();
 //    cout << veto_uniqueId << " :(" << xmean << ", " << ymean << ", " << zmean << "): " << gMC->CurrentVolName() << endl;
     AddHit(fTrackID, veto_uniqueId, TVector3(xmean, ymean,  zmean),

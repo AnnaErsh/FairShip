@@ -70,7 +70,7 @@ veto::veto()
   cout<<endl;
   myfile = new TFile("myfile", "RECREATE");
   mytree = new TTree("mytree", "");
-  mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:Process/I");
+  mytree->Branch("mytree", &mystr, "Energy/D:x:y:z");
 }
 
 veto::veto(const char* name, Bool_t active)
@@ -1121,6 +1121,8 @@ void veto::SetTublengths(Float_t l1, Float_t l2, Float_t l3, Float_t l4, Float_t
 
 Bool_t  veto::ProcessHits(FairVolume* vol)
 {
+  TArrayI processID;
+  gMC->StepProcess(processID);
   /** This method is called from the MC stepping */
   //Set parameters at entrance of volume. Reset ELoss.
   if ( gMC->IsTrackEntering() ) {

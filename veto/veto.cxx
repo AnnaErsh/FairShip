@@ -1121,8 +1121,8 @@ void veto::SetTublengths(Float_t l1, Float_t l2, Float_t l3, Float_t l4, Float_t
 
 Bool_t  veto::ProcessHits(FairVolume* vol)
 {
-  TArrayI processID;
-  gMC->StepProcess(processID);
+  TArrayI processesID;
+  gMC->StepProcesses(processesID);
   /** This method is called from the MC stepping */
   //Set parameters at entrance of volume. Reset ELoss.
   if ( gMC->IsTrackEntering() ) {

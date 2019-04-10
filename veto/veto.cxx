@@ -70,7 +70,7 @@ veto::veto()
   cout<<endl;
   myfile = new TFile("myfile", "RECREATE");
   mytree = new TTree("mytree", "");
-  mytree->Branch("mytree", &mystr, "Energy/D:x:y:z");
+  mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
 }
 
 veto::veto(const char* name, Bool_t active)
@@ -126,7 +126,7 @@ veto::veto(const char* name, Bool_t active)
   cout<<endl;
   myfile = new TFile("/sw/slc7_x86-64/FairShip/master-1/macro/myfile", "RECREATE");
   mytree = new TTree("mytree", "");
-  mytree->Branch("mytree", &mystr, "Energy/D:x:y:z");
+  mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
 }
 
 veto::~veto()
@@ -1123,6 +1123,7 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
 {
   TArrayI processesID;
   gMC->StepProcesses(processesID);
+
   /** This method is called from the MC stepping */
   //Set parameters at entrance of volume. Reset ELoss.
   if ( gMC->IsTrackEntering() ) {
@@ -1167,6 +1168,7 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
 	mystr.x = Pos.X();
 	mystr.y = Pos.Y();
 	mystr.z = Pos.Z();
+        mystr.processesID = processesID;
 //	mystr.Process = proc;
 	mytree->Fill();
 //    cout << veto_uniqueId << " :(" << xmean << ", " << ymean << ", " << zmean << "): " << gMC->CurrentVolName() << endl;

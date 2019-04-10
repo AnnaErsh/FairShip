@@ -19,6 +19,7 @@ struct __attribute__((packed)) mystruct {
 	double x;
 	double y;
 	double z;
+        TArrayI processesID;
 //	TMCProcess Process;
 };
 

@@ -34,6 +34,8 @@
 
 
 #include <iostream>
+#include <fstream>
+
 using std::cout;
 using std::endl;
 
@@ -68,7 +70,8 @@ veto::veto()
   cout<<endl;
   cout<<endl;
   cout<<endl;
-  myfile = new TFile("myfile", "RECREATE");
+  ofstream output("veto_output.txt");
+  myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
 }
@@ -124,7 +127,8 @@ veto::veto(const char* name, Bool_t active)
   cout<<endl;
   cout<<endl;
   cout<<endl;
-  myfile = new TFile("/sw/slc7_x86-64/FairShip/master-1/macro/myfile", "RECREATE");
+  ofstream output("veto_output.txt");
+  myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
 }
@@ -1170,6 +1174,7 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
 	mystr.z = Pos.Z();
         mystr.processesID = processesID;
 //	mystr.Process = proc;
+        output<<Pos.X()<<" "<<Pos.Y()<<" "<<Pos.Z()<<" "<<gMC->Edep()<<" "<<processesID;
 	mytree->Fill();
 //    cout << veto_uniqueId << " :(" << xmean << ", " << ymean << ", " << zmean << "): " << gMC->CurrentVolName() << endl;
     AddHit(fTrackID, veto_uniqueId, TVector3(xmean, ymean,  zmean),

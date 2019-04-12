@@ -9,6 +9,7 @@
 #include "TFile.h"
 #include "TTree.h"
 #include <map>
+#include <fstream>
 
 class vetoPoint;
 class FairVolume;
@@ -109,6 +110,7 @@ class veto: public FairDetector
 
    TFile* myfile;
    TTree* mytree;
+   std::ofstream output("veto_output.txt");
    //TBranch mybranch;
    mystruct mystr;
     /** Track information to be stored until the track leaves the

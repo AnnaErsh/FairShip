@@ -71,7 +71,7 @@ veto::veto()
   cout<<endl;
   cout<<endl;
   cout<<endl;
-  ofstream output("veto_output.txt");
+//   ofstream output("veto_output.txt");
   myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
@@ -128,7 +128,7 @@ veto::veto(const char* name, Bool_t active)
   cout<<endl;
   cout<<endl;
   cout<<endl;
-  ofstream output("veto_output.txt");
+//   ofstream output("veto_output.txt");
   myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");

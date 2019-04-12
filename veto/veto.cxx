@@ -38,6 +38,7 @@
 
 using std::cout;
 using std::endl;
+using std::ofstream;
 
 Double_t cm  = 1;       // cm
 Double_t m   = 100*cm;  //  m

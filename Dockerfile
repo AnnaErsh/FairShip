@@ -10,6 +10,7 @@ FROM olantwin/ship-base:20181116
 
 #my repo
 RUN git clone -b master https://github.com/AnnaErsh/FairShip.git
+#ADD . /home/ann/FairShip/.git
 
 # Build FairShip
 RUN aliBuild -c shipdist/ --defaults fairship build FairShip --no-local ROOT && aliBuild clean 

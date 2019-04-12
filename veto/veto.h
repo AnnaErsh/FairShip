@@ -110,7 +110,7 @@ class veto: public FairDetector
 
    TFile* myfile;
    TTree* mytree;
-   std::ofstream output("veto_output.txt");
+   std::ofstream output;
    //TBranch mybranch;
    mystruct mystr;
     /** Track information to be stored until the track leaves the

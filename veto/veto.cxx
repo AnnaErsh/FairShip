@@ -71,7 +71,7 @@ veto::veto()
   cout<<endl;
   cout<<endl;
   cout<<endl;
- output.open("veto_output.txt");
+//  output.open("veto_output.txt");
   myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
@@ -128,7 +128,7 @@ veto::veto(const char* name, Bool_t active)
   cout<<endl;
   cout<<endl;
   cout<<endl;
-  output.open("veto_output.txt");
+//   output.open("veto_output.txt");
   myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
@@ -1175,12 +1175,12 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
 	mystr.z = Pos.Z();
         mystr.processesID = processesID;
 //	mystr.Process = proc;
-        output<<Pos.X()<<" "<<Pos.Y()<<" "<<Pos.Z()<<" "<<gMC->Edep()<<" ";
-        for (int i=0; i<processesID.fN; i++)
-        {
-            output<<processesID[i]<<" ";
-        }
-        output<<endl;
+//         output<<Pos.X()<<" "<<Pos.Y()<<" "<<Pos.Z()<<" "<<gMC->Edep()<<" ";
+//         for (int i=0; i<processesID.fN; i++)
+//         {
+//             output<<processesID[i]<<" ";
+//         }
+//         output<<endl;
 	mytree->Fill();
 //    cout << veto_uniqueId << " :(" << xmean << ", " << ymean << ", " << zmean << "): " << gMC->CurrentVolName() << endl;
     AddHit(fTrackID, veto_uniqueId, TVector3(xmean, ymean,  zmean),

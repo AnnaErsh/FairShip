@@ -1176,11 +1176,11 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
         mystr.processesID = processesID;
 //	mystr.Process = proc;
 //         output<<Pos.X()<<" "<<Pos.Y()<<" "<<Pos.Z()<<" "<<gMC->Edep()<<" ";
-//         for (int i=0; i<processesID.fN; i++)
-//         {
-//             output<<processesID[i]<<" ";
-//         }
-//         output<<endl;
+         for (int i=0; i<processesID.fN; i++)
+         {
+             cout<<processesID[i]<<" ";
+         }
+         cout<<endl;
 	mytree->Fill();
 //    cout << veto_uniqueId << " :(" << xmean << ", " << ymean << ", " << zmean << "): " << gMC->CurrentVolName() << endl;
     AddHit(fTrackID, veto_uniqueId, TVector3(xmean, ymean,  zmean),

@@ -1173,13 +1173,17 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
 	mystr.x = Pos.X();
 	mystr.y = Pos.Y();
 	mystr.z = Pos.Z();
-        mystr.processesID = processesID;
+//         mystr.processesID = processesID;
 //	mystr.Process = proc;
+        int processes[200];
 //         output<<Pos.X()<<" "<<Pos.Y()<<" "<<Pos.Z()<<" "<<gMC->Edep()<<" ";
+        if (processesID.fN > 200) cout<<"too much processes!!!"<<endl;
          for (int i=0; i<processesID.fN; i++)
          {
-             cout<<processesID[i]<<" ";
+             processes[i] = processesID[i];
+//              cout<<processesID[i]<<" ";
          }
+         mystr.processesID = processes;
          cout<<endl;
 	mytree->Fill();
 //    cout << veto_uniqueId << " :(" << xmean << ", " << ymean << ", " << zmean << "): " << gMC->CurrentVolName() << endl;

@@ -21,7 +21,7 @@ struct __attribute__((packed)) mystruct {
 	double x;
 	double y;
 	double z;
-        TArrayI processesID;
+        int processesID[200]={-1};
 //	TMCProcess Process;
 };
 

@@ -1179,7 +1179,7 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
         if (processesID.fN > 200) cout<<"too much processes!!!"<<endl;
          for (int i=0; i<processesID.fN; i++)
          {
-             output<<i<<" ";
+             output<<processesID[i]<<" ";
              mystr.processesID[i] = processesID[i];
               cout<<processesID[i]<<" ";
          }         

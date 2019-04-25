@@ -121,7 +121,7 @@ class veto: public FairDetector
    TMCProcess Process;
    
    //TBranch mybranch;
-   mystruct mystr;
+//    mystruct mystr;
     /** Track information to be stored until the track leaves the
     active volume.
     */

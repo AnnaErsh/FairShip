@@ -1189,7 +1189,7 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
          for (int i=0; i<processesID.fN; i++)
          {
              output<<processesID[i]<<" ";
-             mystr.processesID[i] = processesID[i];
+//              mystr.processesID[i] = processesID[i];
               cout<<processesID[i]<<" ";
          }         
          cout<<endl;

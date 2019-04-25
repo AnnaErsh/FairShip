@@ -111,7 +111,7 @@ class veto: public FairDetector
 
    TFile* myfile;
    TTree* mytree;
-   std::ofstream output;
+//    std::ofstream output;
    
    double my_energy;
    double my_x;

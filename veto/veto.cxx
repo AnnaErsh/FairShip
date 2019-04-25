@@ -71,7 +71,7 @@ veto::veto()
   cout<<endl;
   cout<<endl;
   cout<<endl;
-  output.open("veto_output.txt");
+//   output.open("veto_output.txt");
   myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
 //   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
@@ -133,7 +133,7 @@ veto::veto(const char* name, Bool_t active)
   cout<<endl;
   cout<<endl;
   cout<<endl;
-  output.open("veto_output.txt");
+//   output.open("veto_output.txt");
   myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
 //   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
@@ -1184,17 +1184,17 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
 	my_y = Pos.Y();
 	my_z = Pos.Z();
         Process = processesID;
-         output<<Pos.X()<<" "<<Pos.Y()<<" "<<Pos.Z()<<" "<<gMC->Edep()<<" ";
+//          /*output*/<<Pos.X()<<" "<<Pos.Y()<<" "<<Pos.Z()<<" "<<gMC->Edep()<<" ";
         if (processesID.fN > 200) cout<<"too much processes!!!"<<endl;
-         for (int i=0; i<processesID.fN; i++)
+        /* for (int i=0; i<processesID.fN; i++)
          {
              output<<processesID[i]<<" ";
 //              mystr.processesID[i] = processesID[i];
               cout<<processesID[i]<<" ";
-         }         
-         cout<<endl;
+         }  */       
+//          cout<<endl;
 	mytree->Fill();
-        output<<endl;
+//         output<<endl;
 //    cout << veto_uniqueId << " :(" << xmean << ", " << ymean << ", " << zmean << "): " << gMC->CurrentVolName() << endl;
     AddHit(fTrackID, veto_uniqueId, TVector3(xmean, ymean,  zmean),
            TVector3(fMom.Px(), fMom.Py(), fMom.Pz()), fTime, fLength,

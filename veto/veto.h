@@ -16,14 +16,14 @@ class vetoPoint;
 class FairVolume;
 class TClonesArray;
 
-struct __attribute__((packed)) mystruct {
-	double Energy;
-	double x;
-	double y;
-	double z;
-        int processesID[200]={-1};
-//	TMCProcess Process;
-};
+// struct __attribute__((packed)) mystruct {
+// 	double Energy;
+// 	double x;
+// 	double y;
+// 	double z;
+//         int processesID[200]={-1};
+// //	TMCProcess Process;
+// };
 
 
 class veto: public FairDetector
@@ -112,6 +112,14 @@ class veto: public FairDetector
    TFile* myfile;
    TTree* mytree;
    std::ofstream output;
+   
+   double Energy;
+   double x;
+   double y;
+   double z;
+   int processesID[200]={-1};
+   TMCProcess Process;
+   
    //TBranch mybranch;
    mystruct mystr;
     /** Track information to be stored until the track leaves the

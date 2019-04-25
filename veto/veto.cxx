@@ -74,7 +74,12 @@ veto::veto()
   output.open("veto_output.txt");
   myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
-  mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
+//   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
+  mytree->Branch("x",&x);
+  mytree->Branch("y",&y);
+  mytree->Branch("z",&z);
+  mytree->Branch("energy",&Energy);
+  mytree->Branch("processID",&Process);
 }
 
 veto::veto(const char* name, Bool_t active)
@@ -131,7 +136,12 @@ veto::veto(const char* name, Bool_t active)
   output.open("veto_output.txt");
   myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
-  mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
+//   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
+  mytree->Branch("x",&x);
+  mytree->Branch("y",&y);
+  mytree->Branch("z",&z);
+  mytree->Branch("energy",&Energy);
+  mytree->Branch("processID",&Process);
 }
 
 veto::~veto()
@@ -1126,8 +1136,6 @@ void veto::SetTublengths(Float_t l1, Float_t l2, Float_t l3, Float_t l4, Float_t
 
 Bool_t  veto::ProcessHits(FairVolume* vol)
 {
-  TArrayI processesID;
-  gMC->StepProcesses(processesID);
 
   /** This method is called from the MC stepping */
   //Set parameters at entrance of volume. Reset ELoss.
@@ -1169,12 +1177,13 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
     Double_t zmean = (fPos.Z()+Pos.Z())/2. ;
 
   //  TMCProcess proc = gMC->ProdProcess();
-	mystr.Energy = gMC->Edep();
-	mystr.x = Pos.X();
-	mystr.y = Pos.Y();
-	mystr.z = Pos.Z();
-//         mystr.processesID = processesID;
-//	mystr.Process = proc;
+    TArrayI processesID;
+    gMC->StepProcesses(processesID);
+	Energy = gMC->Edep();
+	x = Pos.X();
+	y = Pos.Y();
+	z = Pos.Z();
+        Process = processesID;
          output<<Pos.X()<<" "<<Pos.Y()<<" "<<Pos.Z()<<" "<<gMC->Edep()<<" ";
         if (processesID.fN > 200) cout<<"too much processes!!!"<<endl;
          for (int i=0; i<processesID.fN; i++)

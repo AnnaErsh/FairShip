@@ -113,12 +113,12 @@ class veto: public FairDetector
    TTree* mytree;
    std::ofstream output;
    
-   double Energy;
-   double x;
-   double y;
-   double z;
-   int processesID[200]={-1};
-   TMCProcess Process;
+   double my_energy;
+   double my_x;
+   double my_y;
+   double my_z;
+   int my_processesID[200]={-1};
+   TArrayI Process;
    
    //TBranch mybranch;
 //    mystruct mystr;

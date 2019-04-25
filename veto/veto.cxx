@@ -75,10 +75,10 @@ veto::veto()
   myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
 //   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
-  mytree->Branch("x",&x);
-  mytree->Branch("y",&y);
-  mytree->Branch("z",&z);
-  mytree->Branch("energy",&Energy);
+  mytree->Branch("x",&my_x);
+  mytree->Branch("y",&my_y);
+  mytree->Branch("z",&my_z);
+  mytree->Branch("energy",&my_energy);
   mytree->Branch("processID",&Process);
 }
 
@@ -137,10 +137,10 @@ veto::veto(const char* name, Bool_t active)
   myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
 //   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
-  mytree->Branch("x",&x);
-  mytree->Branch("y",&y);
-  mytree->Branch("z",&z);
-  mytree->Branch("energy",&Energy);
+  mytree->Branch("x",&my_x);
+  mytree->Branch("y",&my_y);
+  mytree->Branch("z",&my_z);
+  mytree->Branch("energy",&my_energy);
   mytree->Branch("processID",&Process);
 }
 
@@ -1179,10 +1179,10 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
   //  TMCProcess proc = gMC->ProdProcess();
     TArrayI processesID;
     gMC->StepProcesses(processesID);
-	Energy = gMC->Edep();
-	x = Pos.X();
-	y = Pos.Y();
-	z = Pos.Z();
+	my_energy = gMC->Edep();
+	my_x = Pos.X();
+	my_y = Pos.Y();
+	my_z = Pos.Z();
         Process = processesID;
          output<<Pos.X()<<" "<<Pos.Y()<<" "<<Pos.Z()<<" "<<gMC->Edep()<<" ";
         if (processesID.fN > 200) cout<<"too much processes!!!"<<endl;

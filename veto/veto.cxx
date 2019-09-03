@@ -83,10 +83,10 @@ veto::veto()
   mytree->Branch("cur_energy", &cur_energy);
   
   trackparams = new TTree("trackparams", "");
-  trackparams->Branch("TrackID", fTrackID);
-  trackparams->Branch("xmean", xmean);
-  trackparams->Branch("ymean", ymean);
-  trackparams->Branch("zmean", zmean);
+  trackparams->Branch("TrackID", &fTrackID);
+  trackparams->Branch("xmean", &xmean);
+  trackparams->Branch("ymean", &ymean);
+  trackparams->Branch("zmean", &zmean);
 }
 
 veto::veto(const char* name, Bool_t active)
@@ -1190,7 +1190,7 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
      xmean = (fPos.X()+Pos.X())/2. ;
      ymean = (fPos.Y()+Pos.Y())/2. ;
      zmean = (fPos.Z()+Pos.Z())/2. ;
-
+     trackparams->Fill();
      cur_energy = p->Energy();
   //  TMCProcess proc = gMC->ProdProcess();
     TArrayI processesID;
@@ -1210,7 +1210,7 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
          }  */       
 //          cout<<endl;
 	mytree->Fill();
-        trackparams->Fill();
+        
 //         output<<endl;
 //    cout << veto_uniqueId << " :(" << xmean << ", " << ymean << ", " << zmean << "): " << gMC->CurrentVolName() << endl;
     AddHit(fTrackID, veto_uniqueId, TVector3(xmean, ymean,  zmean),

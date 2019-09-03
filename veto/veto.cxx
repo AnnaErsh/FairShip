@@ -81,10 +81,7 @@ veto::veto()
   mytree->Branch("energy", &my_energy);
   mytree->Branch("processID", &Process);
   mytree->Branch("cur_energy", &cur_energy);
-  mytree->Branch("TrackID", &fTrackID);
-  mytree->Branch("xmean", &xmean);
-  mytree->Branch("ymean", &ymean);
-  mytree->Branch("zmean", &zmean);
+
   
   trackparams = new TTree("trackparams", "");
   trackparams->Branch("TrackID", &fTrackID);
@@ -153,11 +150,7 @@ veto::veto(const char* name, Bool_t active)
   mytree->Branch("energy",&my_energy);
   mytree->Branch("processID",&Process);
   mytree->Branch("cur_energy", &cur_energy);
-  mytree->Branch("TrackID", &fTrackID);
-  mytree->Branch("xmean", &xmean);
-  mytree->Branch("ymean", &ymean);
-  mytree->Branch("zmean", &zmean);
-  
+
   
   trackparams = new TTree("trackparams", "");
   trackparams->Branch("TrackID", &fTrackID);

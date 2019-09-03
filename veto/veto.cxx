@@ -81,6 +81,10 @@ veto::veto()
   mytree->Branch("energy", &my_energy);
   mytree->Branch("processID", &Process);
   mytree->Branch("cur_energy", &cur_energy);
+  mytree->Branch("TrackID", &fTrackID);
+  mytree->Branch("xmean", &xmean);
+  mytree->Branch("ymean", &ymean);
+  mytree->Branch("zmean", &zmean);
   
   trackparams = new TTree("trackparams", "");
   trackparams->Branch("TrackID", &fTrackID);
@@ -143,13 +147,17 @@ veto::veto(const char* name, Bool_t active)
 //   output.open("veto_output.txt");
   myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
-//   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
   mytree->Branch("x",&my_x);
   mytree->Branch("y",&my_y);
   mytree->Branch("z",&my_z);
   mytree->Branch("energy",&my_energy);
   mytree->Branch("processID",&Process);
   mytree->Branch("cur_energy", &cur_energy);
+  mytree->Branch("TrackID", &fTrackID);
+  mytree->Branch("xmean", &xmean);
+  mytree->Branch("ymean", &ymean);
+  mytree->Branch("zmean", &zmean);
+  
   
   trackparams = new TTree("trackparams", "");
   trackparams->Branch("TrackID", &fTrackID);
@@ -1190,8 +1198,8 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
      xmean = (fPos.X()+Pos.X())/2. ;
      ymean = (fPos.Y()+Pos.Y())/2. ;
      zmean = (fPos.Z()+Pos.Z())/2. ;
-     trackparams->Fill();
      cur_energy = p->Energy();
+     trackparams->Fill();
   //  TMCProcess proc = gMC->ProdProcess();
     TArrayI processesID;
     gMC->StepProcesses(processesID);

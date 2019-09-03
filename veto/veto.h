@@ -111,6 +111,7 @@ class veto: public FairDetector
 
    TFile* myfile;
    TTree* mytree;
+   TTree* trackparams;
 //    std::ofstream output;
    
    double my_energy;
@@ -119,6 +120,11 @@ class veto: public FairDetector
    double my_z;
    int my_processesID[200]={-1};
    TArrayI Process;
+   
+   Double_t xmean;
+   Double_t ymean;
+   Double_t zmean;
+   Double_t cur_energy;
    
    //TBranch mybranch;
 //    mystruct mystr;

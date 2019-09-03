@@ -75,11 +75,18 @@ veto::veto()
   myfile = new TFile("myfile.root", "RECREATE");
   mytree = new TTree("mytree", "");
 //   mytree->Branch("mytree", &mystr, "Energy/D:x:y:z:processID/I");
-  mytree->Branch("x",&my_x);
-  mytree->Branch("y",&my_y);
-  mytree->Branch("z",&my_z);
-  mytree->Branch("energy",&my_energy);
-  mytree->Branch("processID",&Process);
+  mytree->Branch("x", &my_x);
+  mytree->Branch("y", &my_y);
+  mytree->Branch("z", &my_z);
+  mytree->Branch("energy", &my_energy);
+  mytree->Branch("processID", &Process);
+  mytree->Branch("cur_energy", &cur_energy);
+  
+  trackparams = new TTree("trackparams", "");
+  trackparams->Branch("TrackID", fTrackID);
+  trackparams->Branch("xmean", xmean);
+  trackparams->Branch("ymean", ymean);
+  trackparams->Branch("zmean", zmean);
 }
 
 veto::veto(const char* name, Bool_t active)
@@ -142,6 +149,13 @@ veto::veto(const char* name, Bool_t active)
   mytree->Branch("z",&my_z);
   mytree->Branch("energy",&my_energy);
   mytree->Branch("processID",&Process);
+  mytree->Branch("cur_energy", &cur_energy);
+  
+  trackparams = new TTree("trackparams", "");
+  trackparams->Branch("TrackID", fTrackID);
+  trackparams->Branch("xmean", xmean);
+  trackparams->Branch("ymean", ymean);
+  trackparams->Branch("zmean", zmean);
 }
 
 veto::~veto()
@@ -165,6 +179,7 @@ veto::~veto()
   cout<<endl;
   myfile->Write();
   delete mytree;
+  delete trackparams;
   delete myfile;
 }
 
@@ -1176,6 +1191,7 @@ Bool_t  veto::ProcessHits(FairVolume* vol)
     Double_t ymean = (fPos.Y()+Pos.Y())/2. ;
     Double_t zmean = (fPos.Z()+Pos.Z())/2. ;
 
+    Double_t cur_energy = p->Energy();
   //  TMCProcess proc = gMC->ProdProcess();
     TArrayI processesID;
     gMC->StepProcesses(processesID);
